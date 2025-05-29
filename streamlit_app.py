@@ -8,24 +8,30 @@ def conversion(str,operation):
     elif operation == "Lower Case":
         return str.lower()
     elif operation == "Title Case":
-        return str.captialize()
-    elif operation == "Reverse":
-        return str[::-1]
+        return str.title()
+    elif operation == "Split":
+       return str.split(" ")
+    elif operation == "find":
+       ch = st.text_input("Enter the character to find index of that:")
+       return str.find(ch)
     else:
-        return str
+        return str[::-1]
 
 str = st.text_input("Given String:")
 
-operation = st.selectbox("Select option to perform method on Given String",("Upper Case","Lower Case","Title Case","Reverse"))
-
-output = conversion(str,operation)
-new_row = {
+operation = st.selectbox("Select option to perform method on Given String",("Upper Case","Lower Case","Title Case","Reverse","Split","find"))
+def res():
+   output = conversion(str,operation)
+   new_row = {
     "Given String":str,
     "Operations/Methods":operation,
     "Output":output,
-}
-if "data" not in st.session_state:
+    }
+   if "data" not in st.session_state:
     st.session_state.data = pd.DataFrame(columns = store_data.columns)
- st.session_state.data = pd.concat([st.session_state.data,pd.DataFrame([new_row])],ignore_index = True)
+   st.session_state.data = pd.concat([st.session_state.data,pd.DataFrame([new_row])],ignore_index = True)
+   st.dataframe(st.session_state.data)
+if st.button("Convert"):
+   st.write(res())
 
 
